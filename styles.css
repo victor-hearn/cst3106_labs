@@ -1,0 +1,21 @@
+
+body {
+    margin-inline: 2%;
+}
+
+.title {
+    text-align: center;
+}
+
+.heading {
+    text-align: center;
+}
+
+#contact-info {
+    display: flex;
+    background-color: blue;
+}
+
+#linkedin {
+    background-color: bisque;
+}
