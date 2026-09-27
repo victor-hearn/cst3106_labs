@@ -1,0 +1,73 @@
+body {
+    margin-inline: 1.5rem;
+}
+
+.title {
+    text-align: center;
+}
+
+.heading {
+    text-align: center;
+}
+
+#contact-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+#linkedin {
+    margin: 0;
+}
+
+#linkedin-preview {
+    /*display: none;*/
+    position: absolute;
+    pointer-events: none;
+    right: -3em;
+    top: 0em;
+    opacity: 0%;
+    transition: opacity 0.2s;
+    box-shadow: 0.3em 0.3em 0.5em grey;
+    scale: 75%;
+}
+
+/*show LinkedIn preview image when hovering over the link */
+#linkedin:hover ~ #linkedin-preview {
+    /* display: block; */
+    opacity: 100%;
+}
+
+#contact-info p {
+    margin: 0;
+}
+
+#education-section {
+    margin-bottom: 5em;
+}
+
+#education {
+    column-count: 2;
+    column-gap: 2rem;
+}
+
+@media screen and (max-width: 1000px) {
+
+    html {
+        font-size: 2.5rem;
+    }
+
+    #contact-info {
+        display: initial;
+    }
+
+    #linkedin-preview {
+        left: -2em;
+        top: 3.5em;
+    }
+
+    #education {
+        column-count: 1;
+    }
+}
