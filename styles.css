@@ -1,3 +1,10 @@
+/*header*/
+
+.navbar {
+    background-color: blue;
+}
+
+/*body*/
 body {
     margin-inline: 1.5rem;
 }
@@ -10,18 +17,18 @@ body {
     text-align: center;
 }
 
-#contact-info {
+.contact-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
 }
 
-#linkedin {
+.linkedin {
     margin: 0;
 }
 
-#linkedin-preview {
+.linkedin-preview {
     /*display: none;*/
     position: absolute;
     pointer-events: none;
@@ -34,20 +41,20 @@ body {
 }
 
 /*show LinkedIn preview image when hovering over the link */
-#linkedin:hover ~ #linkedin-preview {
+.linkedin:hover ~ .linkedin-preview {
     /* display: block; */
     opacity: 100%;
 }
 
-#contact-info p {
+.contact-info p {
     margin: 0;
 }
 
-#education-section {
+.education-section {
     margin-bottom: 5em;
 }
 
-#education {
+.education {
     column-count: 2;
     column-gap: 2rem;
 }
@@ -58,16 +65,16 @@ body {
         font-size: 2.5rem;
     }
 
-    #contact-info {
+    .contact-info {
         display: initial;
     }
 
-    #linkedin-preview {
+    .linkedin-preview {
         left: -2em;
         top: 3.5em;
     }
 
-    #education {
+    .education {
         column-count: 1;
     }
 }
