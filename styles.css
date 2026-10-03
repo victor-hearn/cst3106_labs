@@ -2,6 +2,30 @@
 
 .navbar {
     background-color: blue;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* margin: 0;
+    padding: 0; */
+}
+
+.menu_button_container {
+    height: 3rem;
+    background-color: brown;
+    align-content: center;
+}
+
+.menu_button {
+    padding-inline: 3.5rem;   
+}
+
+.menu_button:hover ~ .resume_dropdown_content {
+
+    display: block
+}
+
+.resume_dropdown_content {
+    display: none;
 }
 
 /*body*/
