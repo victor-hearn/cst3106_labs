@@ -2,10 +2,11 @@
     <meta charset="UTF-8">
     <title>Victor Hearn Resume</title>
     <link rel="stylesheet" href="styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
 </head>
 
 <body>
-    <div class="header">
+    <header class="header">
         <div class="navbar">
             <div class="navbar_button_container">
                 <a class="navbar_button" href="index.html">Home</a>
@@ -25,22 +26,56 @@
                 <a class="navbar_button">Hospital Triage App<br>(coming soon)</a>
             </div>
         </div>
-    </div>
+    </header>
 
 
-    <div class="content">
+    <main class="content">
         <h1 class="title">Victor Hearn Portfolio</h1>
-        <div class="projects">
-            <h2>Projects</h2>
-            <div id="resume_project">
-                <a href="resume.html">HTML Resume</a>
-                <p>My resume converted to webpage format</p>
+        <section id="projects">
+            <div id="project_list_container">
+                <h2>Projects</h2>
+                <div id="resume_project" class="project">
+                    <a class="project_title" href="resume.html">HTML Resume</a>
+                    <p>My resume converted to webpage format</p>
+                </div>
+                <div id="yhatzee_project" class="project">
+                    <a class="project_title">Yhatzee (coming soon)</a>
+                </div>
+                <div id="hospital_project" class="project">
+                    <a class="project_title">Hospital Triage (coming soon)</a>
+                </div>
             </div>
+            <img src="images/resume_ss.png" id="project_preview" class="project_preview"></img>
+            <p class="preview_text">Hover over a project for a preview</p>
+            <p class="preview_text" id="coming_soon">Coming Soon</p>
+
+        </section>
+    </main>
+
+
+    <footer class="footer">
+        <p>&copy Victor Hearn</p>
+        <div class="footer_section">
+            <a class="footer_heading">Projects</a>
+            <p class="footer_subheading">Past</p>
+            <a class="footer_link" href="resume.html">Resume</a>
+            <p class="footer_subheading">Upcoming</p>
+            <a class="footer_link">Yhatzee</a>
+            <a class="footer_link">Hospital Triage</a>
         </div>
-    </div>
 
+        <div class="footer_section">
+            <p class="footer_heading">Links</p>
+            <a class="footer_link" href="index.html">Home</a>
+            <a class="footer_link">About</a>
+            <a class="footer_link">Projects</a>
+        </div>
 
-    <div class="footer">
-
-    </div>
+        <div class="footer_section">
+            <p class="footer_heading">Contact</p>
+            <a class="footer_link" href="https://www.linkedin.com/in/victor-hearn/" target="_blank">LinkedIn</a>
+            <a class="footer_link" href="https://github.com/victor-hearn" target="_blank">Github</a>
+            <a class="footer_link" href="mailto:hear0089@algonquinlive.com">Email</a>
+        </div>
+    </footer>
 </body>

@@ -2,6 +2,7 @@
 
 :root {
     --shadow_colour: rgba(0, 0, 0, 0.2);
+    font-family: 'Inter';
 }
 
 .navbar {
@@ -15,7 +16,7 @@
 }
 
 .navbar_button_container {
-    
+
     /* background-color: brown; */
     align-content: center;
     display: flex;
@@ -43,7 +44,6 @@
     top: 100%;
     background-color: #f9f9f9;
     min-width: 7rem;
-    box-shadow: 0 0.5rem 1rem 0 var(--shadow_colour);
 }
 
 .resume_dropdown_content a:hover {
@@ -61,22 +61,128 @@
 
 /* footer */
 .footer {
-    min-height: 40rem;
-    background-color: black;
+    margin-top: auto;
+    padding-bottom: 1.5rem;
+    background-color: var(--shadow_colour);
+    box-shadow: 0 -0.75rem 1rem 0 var(--shadow_colour);
+    padding-inline: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2rem;
 }
 
+.footer p {
+    margin: 0;
+    margin-top: 0.5rem;
+}
+
+.footer_section {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer_heading {
+    font-size: 1.5rem;
+}
+
+.footer_subheading {
+    font-size: 1.25rem;
+}
 
 /*body*/
 body {
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .content {
     margin-inline: 1.5rem;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .title {
     /* color: aqua; */
+}
+
+#projects {
+    display: flex;
+    justify-content: space-around;
+}
+
+.project {
+    margin-bottom: 2rem;
+    min-width: fit-content;
+}
+
+#project_list_container {
+    min-width: fit-content;
+}
+
+.project p {
+    margin: 0;
+}
+
+.project_title {
+    font-size: 1.25rem;
+}
+
+.project_preview {
+    display: none;
+    max-width: 45rem;
+    border: 0.5rem, solid, black;
+    border-radius: 2rem;
+    box-shadow: 0 0.5rem 1rem 0 var(--shadow_colour);
+    opacity: 0;
+    transition: opacity 0.2s;
+    aspect-ratio: 16 / 5.5;
+}
+
+.preview_text {
+    min-width: 45rem;
+    border: 0.5rem, solid, black;
+    border-radius: 2rem;
+    aspect-ratio: 16 / 5.5;
+    margin: 0;
+    font-size: 2.75rem;
+    text-align: center;
+    align-content: center;
+}
+
+#projects:has(#resume_project:hover) {
+    .project_preview {
+        display: block;
+        opacity: 1;
+    }
+
+    .preview_text {
+        display: none;
+    }
+}
+
+#projects:has(#yhatzee_project:hover) {
+    #coming_soon {
+        display: block;
+    }
+
+    .preview_text {
+        display: none;
+    }
+}
+
+#projects:has(#hospital_project:hover) {
+    #coming_soon {
+        display: block;
+    }
+
+    .preview_text {
+        display: none;
+    }
+}
+
+#coming_soon {
+    display: none;
 }
 
 .resume_title {
@@ -120,10 +226,6 @@ body {
     margin: 0;
 }
 
-.education-section {
-    margin-bottom: 5em;
-}
-
 .education {
     column-count: 2;
     column-gap: 2rem;
@@ -143,6 +245,11 @@ body {
 
     .resume_dropdown_content {
         position: relative;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
     }
 
     .contact-info {
