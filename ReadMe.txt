@@ -1,1 +1,0 @@
-This is the main branch for the CST3106 labs repository. please see other branches for each lab
