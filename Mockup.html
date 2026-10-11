@@ -3,177 +3,179 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Yhatzee</title>
+    <title>Yahtzee</title>
     <link rel="stylesheet" href="styles.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
 </head>
-<body>
-    <h1 style="text-align: center;">Yhatzee!</h1>
-    <div id="score_tables_container">
-    <table id="upper_section">
-        <tr class="titles">
-            <th>Upper Section</th>
-            <td>How to Score</td>
-            <td>Current Game</td>
-            <td>Best Game</td>
-            <td>Last Game</td>
-        </tr>
-        <tr>
-            <td>Ones</td>
-            <td>Count and Add<br>Only Ones</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Twos</td>
-            <td>Count and Add<br>Only Twos</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Threes</td>
-            <td>Count and Add<br>Only Threes</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Fours</td>
-            <td>Count and Add<br>Only Fours</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>fives</td>
-            <td>Count and Add<br>Only Fives</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Sixes</td>
-            <td>Count and Add<br>Only Sixes</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Total Score</td>
-            <td>&rarr;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Bonus</td>
-            <td>If Total Score > 63<br>Score 35</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Total</td>
-            <td>&rarr;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
 
-    <table id="lower_section">
-        <tr class="titles">
-            <th>Lower Section</th>
-            <td>How to Score</td>
-            <td>Current Game</td>
-            <td>Best Game</td>
-            <td>Last Game</td>
-        </tr>
-        <tr>
-            <td>3 of a kind</td>
-            <td>Total of<br>All 5 Dice</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>4 of a kind</td>
-            <td>Total of<br>All 5 Dice</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Full House</td>
-            <td>25 or<br>Sum of Dice</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Small Straight</td>
-            <td>30</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Big Straight</td>
-            <td>40</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Yhatzee</td>
-            <td>50</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Yhatzee bonus</td>
-            <td>+100 for Each<br>Extra Yhatzee</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Total: Upper</td>
-            <td>&rarr;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Total: Lower</td>
-            <td>&rarr;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Grand Total</td>
-            <td>&rarr;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+<body>
+    <h1 style="text-align: center;">Yahtzee!</h1>
+    <div style="display: flex; justify-content: space-around;">
+        <div id="dice_container">
+            <div class="die" id="die1"></div>
+            <div class="die" id="die2"></div>
+            <div class="die" id="die3"></div>
+            <div class="die" id="die4"></div>
+            <div class="die" id="die5"></div>
+            <button id="roll"><strong>Roll</strong></button>
+        </div>
+
+        <div id="score_tables_container">
+            <table id="upper_section">
+                <tr class="titles">
+                    <th>Upper Section</th>
+                    <td>How to Score</td>
+                    <td>Current Game</td>
+                    <td>Best Game</td>
+                    <td>Last Game</td>
+                </tr>
+                <tr>
+                    <td>Ones</td>
+                    <td>Count and Add<br>Only Ones</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Twos</td>
+                    <td>Count and Add<br>Only Twos</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Threes</td>
+                    <td>Count and Add<br>Only Threes</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Fours</td>
+                    <td>Count and Add<br>Only Fours</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>fives</td>
+                    <td>Count and Add<br>Only Fives</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Sixes</td>
+                    <td>Count and Add<br>Only Sixes</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Total Score</td>
+                    <td>&rarr;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Bonus</td>
+                    <td>If Total Score > 63<br>Score 35</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>&rarr;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <table id="lower_section">
+                <tr class="titles">
+                    <th>Lower Section</th>
+                    <td>How to Score</td>
+                    <td>Current Game</td>
+                    <td>Best Game</td>
+                    <td>Last Game</td>
+                </tr>
+                <tr>
+                    <td>3 of a kind</td>
+                    <td>Total of 3<br>Matching Dice</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4 of a kind</td>
+                    <td>Total of 4<br>Matching Dice</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Full House</td>
+                    <td>25 or<br>Sum of Dice</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Small Straight</td>
+                    <td>30</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Big Straight</td>
+                    <td>40</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Yhatzee</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Chance</td>
+                    <td>Total of<br>All 5 Dice</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Total: Upper</td>
+                    <td>&rarr;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Total: Lower</td>
+                    <td>&rarr;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Grand Total</td>
+                    <td>&rarr;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div id="dice_container">
-        <div class="die" id="die1"></div>
-        <div class="die" id="die2"></div>
-        <div class="die" id="die3"></div>
-        <div class="die" id="die4"></div>
-        <div class="die" id="die5"></div>
-    </div>
-    <div class="button_container">
-        <button id="roll"><strong>Roll</strong></button>
-    </div>
-    
+
 </body>
 
 </html>
