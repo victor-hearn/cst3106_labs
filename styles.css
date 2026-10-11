@@ -1,0 +1,9 @@
+td {
+    border: 0.1rem, solid, black;
+    text-align: center;
+}
+
+#score_tables_container {
+    display: flex;
+    justify-content: space-around;
+}
