@@ -1,73 +1,158 @@
+:root {
+    --colour-paper: #F9FBFF;
+    --colour-die: #fcf7eb;
+}
+
+html {
+    font-family: 'Inter';
+}
+
 body {
-    margin-inline: 1.5rem;
+    background-image: url(Images/table.jpg); /* background image in the body so the whole page looks like a table */
 }
 
-.title {
-    text-align: center;
-}
-
-.heading {
-    text-align: center;
-}
-
-#contact-info {
+/* roll button */
+.button_container {
+    margin-top: 3rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+}
+
+#roll {
+    min-height: 2rem;
+    min-width: 5rem;
+    font-size: 2rem;
+}
+
+
+/* dice */
+#dice_container {
+    margin-top: 4rem;
+    margin-left: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-bottom: 5rem;
+}
+
+.die {
+    min-width: 100px;
+    min-height: 100px;
+    background-color:  var(--colour-die);
     position: relative;
+    border-radius: 15%;
+    /* Three box shadows:  */
+    box-shadow: 
+    inset 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.25), inset -0.5rem -0.5rem 0.5rem rgba(0, 0, 0, 0.5), /* inset shadows on all four sides to make the dice look like they have slightly curved edges */
+    1rem 1rem 0.75rem rgba(0, 0, 0, 0.5); /* regular shadow to make look like it is an actual object */
 }
 
-#linkedin {
-    margin: 0;
+
+/* pips */
+.die .middle {
+  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
 }
 
-#linkedin-preview {
-    /*display: none;*/
-    position: absolute;
-    pointer-events: none;
-    right: -3em;
-    top: 0em;
-    opacity: 0%;
-    transition: opacity 0.2s;
-    box-shadow: 0.3em 0.3em 0.5em grey;
-    scale: 75%;
+.die .top-left {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
 }
 
-/*show LinkedIn preview image when hovering over the link */
-#linkedin:hover ~ #linkedin-preview {
-    /* display: block; */
-    opacity: 100%;
+.die .top-right {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
 
-#contact-info p {
-    margin: 0;
+.die .top-middle {
+  position: absolute;
+  top: 1rem;
+  left: 2.5rem;
 }
 
-#education-section {
-    margin-bottom: 5em;
+.die .bottom-left {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
 }
 
-#education {
-    column-count: 2;
-    column-gap: 2rem;
+.die .bottom-right {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
 }
 
-@media screen and (max-width: 1000px) {
+.die .bottom-middle {
+  position: absolute;
+  bottom: 1rem;
+  left: 2.5rem;
+}
 
-    html {
-        font-size: 2.5rem;
-    }
+.die .middle-left {
+  position: absolute;
+  top: 2.5rem;
+  left: 1rem;
+}
 
-    #contact-info {
-        display: initial;
-    }
+.die .middle-right {
+  position: absolute;
+  top: 2.5rem;
+  right: 1rem;
+}
 
-    #linkedin-preview {
-        left: -2em;
-        top: 3.5em;
-    }
+.pip {
+  /* border: 1px solid black; */
+  background-color: black;
+  box-shadow: inset -0.1rem -0.1rem 0.5rem rgba(255, 255, 255, 0.75); /* inset white shadow meant to look like light reflecting on the edge of the inset pips */
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem; 
+}
 
-    #education {
-        column-count: 1;
-    }
+
+/* score table */
+.score_tables_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: var(--colour-paper);
+    background-image: url(Images/paper.png);
+    background-blend-mode: multiply;
+    aspect-ratio: 17/22;
+    box-shadow: 0.5rem 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.1); /* very slight border to make the edge of the paper a bit less harsh and more real */
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+}
+
+.score_tables_container text {
+    mix-blend-mode: multiply; /* slightly makes text blend with the texture of the paper background image */
+}
+
+.score_tables_container h1 {
+    text-align: center;
+    margin-block: 0.5rem;
+}
+
+#lower_section {
+    margin-top: 0.5rem;
+}
+
+.score_tables_container table {
+    border-collapse: collapse;
+}
+
+.score_tables_container td {
+    border: 0.1rem, solid, black;
+    text-align: center;
+    padding-inline: 0.4rem;
+}
+
+.score {
+    font-family: 'Kalam';
+    color: #000050;
+    font-size: 1.4rem;
 }
