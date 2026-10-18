@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+    <script src="YahtzeeEngine.js"></script>
+    <script src="Dice.js"></script>
 </head>
 
 <body>
@@ -16,28 +18,18 @@
                 <div class="pip middle"></div>
             </div>
             <div class="die" id="die2">
-                <div class="pip top-left"></div>
-                <div class="pip bottom-right"></div>
+                <div class="pip middle"></div>
             </div>
             <div class="die" id="die3">
-                <div class="pip top-left"></div>
                 <div class="pip middle"></div>
-                <div class="pip bottom-right"></div>
             </div>
             <div class="die" id="die4">
-                <div class="pip top-left"></div>
-                <div class="pip top-right"></div>
-                <div class="pip bottom-left"></div>
-                <div class="pip bottom-right"></div>
+                <div class="pip middle"></div>
             </div>
             <div class="die" id="die5">
-                <div class="pip top-left"></div>
-                <div class="pip top-right"></div>
                 <div class="pip middle"></div>
-                <div class="pip bottom-left"></div>
-                <div class="pip bottom-right"></div>
             </div>
-            <button id="roll"><strong>Roll</strong></button>
+            <button id="roll" onclick="roll()"><strong>Roll</strong></button>
         </div>
 
         <div class="score_tables_container">
@@ -53,63 +45,63 @@
                 <tr>
                     <td>Ones</td>
                     <td>Count and Add<br>Only Ones</td>
-                    <td class="score"></td>
+                    <td class="score current" id="ones"></td>
                     <td class="score">4</td>
                     <td class="score">1</td>
                 </tr>
                 <tr>
                     <td>Twos</td>
                     <td>Count and Add<br>Only Twos</td>
-                    <td class="score"></td>
+                    <td class="score current" id="twos"></td>
                     <td class="score">4</td>
                     <td class="score">2</td>
                 </tr>
                 <tr>
                     <td>Threes</td>
                     <td>Count and Add<br>Only Threes</td>
-                    <td class="score"></td>
+                    <td class="score current" id="threes"></td>
                     <td class="score">9</td>
                     <td class="score">9</td>
                 </tr>
                 <tr>
                     <td>Fours</td>
                     <td>Count and Add<br>Only Fours</td>
-                    <td class="score"></td>
+                    <td class="score current" id="fours"></td>
                     <td class="score">8</td>
                     <td class="score">8</td>
                 </tr>
                 <tr>
                     <td>Fives</td>
                     <td>Count and Add<br>Only Fives</td>
-                    <td class="score"></td>
+                    <td class="score current" id="fives"></td>
                     <td class="score">20</td>
                     <td class="score">15</td>
                 </tr>
                 <tr>
                     <td>Sixes</td>
                     <td>Count and Add<br>Only Sixes</td>
-                    <td class="score"></td>
+                    <td class="score current" id="sixes" onclick="isValidSelection('sixes')"></td>
                     <td class="score">24</td>
                     <td class="score">18</td>
                 </tr>
                 <tr>
                     <td>Total Score</td>
                     <td>&rarr;</td>
-                    <td class="score"></td>
+                    <td class="score" id="upper_subtotal"></td>
                     <td class="score">69</td>
                     <td class="score">53</td>
                 </tr>
                 <tr>
                     <td>Bonus</td>
                     <td>If Total Score > 63<br>Score 35</td>
-                    <td class="score"></td>
+                    <td class="score" id="bonus"></td>
                     <td class="score">35</td>
                     <td class="score">0</td>
                 </tr>
                 <tr>
                     <td>Total</td>
                     <td>&rarr;</td>
-                    <td class="score"></td>
+                    <td class="score" id="upper_total"></td>
                     <td class="score">104</td>
                     <td class="score">53</td>
                 </tr>
@@ -126,70 +118,70 @@
                 <tr>
                     <td>3 of a kind</td>
                     <td>Total of 3<br>Matching Dice</td>
-                    <td class="score"></td>
+                    <td class="score current" id="toak"></td>
                     <td class="score">0</td>
                     <td class="score">23</td>
                 </tr>
                 <tr>
                     <td>4 of a kind</td>
                     <td>Total of 4<br>Matching Dice</td>
-                    <td class="score"></td>
+                    <td class="score current" id="foak"></td>
                     <td class="score">13</td>
                     <td class="score">0</td>
                 </tr>
                 <tr>
                     <td>Full House</td>
                     <td>25 or<br>Sum of Dice</td>
-                    <td class="score"></td>
+                    <td class="score current" id="full_house"></td>
                     <td class="score">25</td>
                     <td class="score">25</td>
                 </tr>
                 <tr>
                     <td>Small Straight</td>
                     <td>30</td>
-                    <td class="score"></td>
+                    <td class="score current" id="sm_straight"></td>
                     <td class="score">30</td>
                     <td class="score">30</td>
                 </tr>
                 <tr>
                     <td>Big Straight</td>
                     <td>40</td>
-                    <td class="score"></td>
+                    <td class="score current" id="lg_straight"></td>
                     <td class="score">40</td>
                     <td class="score">40</td>
                 </tr>
                 <tr>
                     <td>Yhatzee</td>
                     <td>50</td>
-                    <td class="score"></td>
+                    <td class="score current" id="yahtzee"></td>
                     <td class="score">0</td>
                     <td class="score">0</td>
                 </tr>
                 <tr>
                     <td>Chance</td>
                     <td>Total of<br>All 5 Dice</td>
-                    <td class="score"></td>
+                    <td class="score current" id="chance"></td>
                     <td class="score">21</td>
                     <td class="score">18</td>
                 </tr>
                 <tr>
                     <td>Total: Upper</td>
                     <td>&rarr;</td>
-                    <td class="score"></td>
+                    <td class="score" id="upper_total2"></td>
                     <td class="score">104</td>
                     <td class="score">53</td>
                 </tr>
                 <tr>
                     <td>Total: Lower</td>
                     <td>&rarr;</td>
-                    <td class="score"></td>
+                    <td class="score" id="lower_total"></td>
                     <td class="score">129</td>
                     <td class="score">136</td>
                 </tr>
                 <tr>
                     <td>Grand Total</td>
                     <td>&rarr;</td>
-                    <td class="score"></td>
+                    <td class="score" id="grand_total"></td>
                     <td class="score">233</td>
                     <td class="score">189</td>
                 </tr>
