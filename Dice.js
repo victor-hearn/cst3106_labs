@@ -1,26 +1,23 @@
-
-let diceValues = [1, 1, 1, 1, 1];
-
-
-const dieValue1 = "<div class=\"pip middle\"></div>";
-const dieValue2 = "<div class=\"pip top-left\"></div> <div class=\"pip bottom-right\"></div>";
-const dieValue3 = "<div class=\"pip top-left\"></div> <div class=\"pip middle\"></div> <div class=\"pip bottom-right\"></div>";
-const dieValue4 = "<div class=\"pip top-left\"></div> <div class=\"pip top-right\"></div> <div class=\"pip bottom-left\"></div> <div class=\"pip bottom-right\"></div>";
-const dieValue5 = "<div class=\"pip top-left\"></div> <div class=\"pip top-right\"></div> <div class=\"pip middle\"></div> <div class=\"pip bottom-left\"></div> <div class=\"pip bottom-right\"></div>";
-const dieValue6 = "<div class=\"pip top-left\"></div> <div class=\"pip top-right\"></div> <div class=\"pip middle-left\"></div> <div class=\"pip middle-right\"></div> <div class=\"pip bottom-left\"></div> <div class=\"pip bottom-right\"></div>";
+const dieFace1 = "<div class=\"pip middle\"></div>";
+const dieFace2 = "<div class=\"pip top-left\"></div> <div class=\"pip bottom-right\"></div>";
+const dieFace3 = "<div class=\"pip top-left\"></div> <div class=\"pip middle\"></div> <div class=\"pip bottom-right\"></div>";
+const dieFace4 = "<div class=\"pip top-left\"></div> <div class=\"pip top-right\"></div> <div class=\"pip bottom-left\"></div> <div class=\"pip bottom-right\"></div>";
+const dieFace5 = "<div class=\"pip top-left\"></div> <div class=\"pip top-right\"></div> <div class=\"pip middle\"></div> <div class=\"pip bottom-left\"></div> <div class=\"pip bottom-right\"></div>";
+const dieFace6 = "<div class=\"pip top-left\"></div> <div class=\"pip top-right\"></div> <div class=\"pip middle-left\"></div> <div class=\"pip middle-right\"></div> <div class=\"pip bottom-left\"></div> <div class=\"pip bottom-right\"></div>";
 
 
-let faceValues = [dieValue1, dieValue2, dieValue3, dieValue4, dieValue5, dieValue6]
+let faceValues = [dieFace1, dieFace2, dieFace3, dieFace4, dieFace5, dieFace6];
 
 function roll() {
+    let diceValues = [1, 1, 1, 1, 1];
     for (let i = 0; i < diceValues.length; i++) {
         diceValues[i] = Math.floor(Math.random() * 6);
-        // console.log("rolled a " + dice[i])
     }
-    updateDiceFaces();
+    updateDiceFaces(diceValues);
+    calculateScore(diceValues);
 }
 
-function updateDiceFaces() {
+function updateDiceFaces(values) {
     let dice = [
         document.getElementById("die1"),
         document.getElementById("die2"),
@@ -30,7 +27,7 @@ function updateDiceFaces() {
     ];
 
     for (let i =0; i < 5; i++) {
-        dice[i].innerHTML = faceValues[diceValues[i]];
+        dice[i].innerHTML = faceValues[values[i]];
     }
 
 }
