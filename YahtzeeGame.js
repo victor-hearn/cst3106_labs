@@ -45,6 +45,7 @@ let bestGame = {
 }
 
 function startNewGame() {
+    document.getElementById("endScreen").style = "display: none";
     document.querySelectorAll('.current').forEach(slot => slot.addEventListener('click', endRound));
     let scoreBoxes = document.getElementsByClassName("current");
 
@@ -77,6 +78,8 @@ function startNewGame() {
         scoreTotal: 0,
         rollsLeft: 3
     };
+    document.getElementById("roll").innerHTML = "<strong>Roll " + gameState.rollsLeft + "/3</strong>"
+    document.getElementById("instructions").innerHTML = "";
 }
 
 function endRound(e) {
@@ -88,6 +91,7 @@ function endRound(e) {
         gameState.scoreUpper += roundScore;
         document.getElementById("upper_subtotal").innerHTML = gameState.scoreUpper;
         if (gameState.scoreUpper > 63) {
+            gameState.bonus = true;
             document.getElementById("bonus").innerHTML = 35;
             gameState.scoreUpper += 35;
         }
@@ -108,14 +112,23 @@ function endRound(e) {
     diceValues = [0, 0, 0, 0, 0]
     updateDiceFaces(diceValues);
 
-    gameState.round++;
-    gameState.rollsLeft = 3;
-    document.getElementById("roll").innerHTML = "<strong>Roll " + gameState.rollsLeft + "/3</strong>"
+    if (gameState.round == 13) {
+        endGame();
+    } else {
+        gameState.round++;
+        gameState.rollsLeft = 3;
+        document.getElementById("roll").innerHTML = "<strong>Roll " + gameState.rollsLeft + "/3</strong>"
+        document.getElementById("instructions").innerHTML = "";
+    }
 }
 
 function endGame() {
     previousGame = getGameScores();
-    startNewGame();
+    if (previousGame.total > bestGame.total) {
+        bestGame = previousGame;
+    }
+    document.getElementById("endScore").innerHTML = gameState.scoreTotal;
+    document.getElementById("endScreen").style = "display: block";
 }
 
 function getGameScores() {
@@ -134,7 +147,7 @@ function getGameScores() {
         lgStraight: document.getElementById("lg_straight").innerHTML,
         yahtzee: document.getElementById("yahtzee").innerHTML,
         chance: document.getElementById("chance").innerHTML,
-        total: document.getElementById("total").innerHTML
+        total: document.getElementById("grand_total").innerHTML
     }
     return game;
 }

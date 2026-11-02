@@ -13,6 +13,11 @@
 </head>
 
 <body>
+    <div id="endScreen">
+        <h1 id="endMsg">Final Score:</h1>
+        <h2 id="endScore"></h2>
+        <button onclick="startNewGame()">New Game</button>
+    </div>
     <div style="display: flex; justify-content: space-around;">
         <div id="dice_container">
             <div class="die" id="die1" onclick="hold(1)">
@@ -31,12 +36,16 @@
                 <div class="pip middle"></div>
             </div>
             <button id="roll" onclick="roll()"><strong>Roll 0/3</strong></button>
+            <p id="instructions">Click "New Game" to start</p>
         </div>
 
         <div class="score_tables_container">
             <div style="display: flex; justify-content: space-around;">
                 <h1>Yahtzee!</h1>
+                <div style="display: flex;">
                 <button onclick="startNewGame()">New Game</button>
+                <button onclick="endGame()">End Game</button>
+                </div>
             </div>
             <table id="upper_section">
                 <tr class="titles">

@@ -11,6 +11,20 @@ body {
     background-image: url(Images/table.jpg); /* background image in the body so the whole page looks like a table */
 }
 
+#endScreen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: none;
+    background-color: var(--colour-paper);
+    background-image: url(Images/paper.png);
+    background-blend-mode: multiply;
+    box-shadow: 0.5rem 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.1); /* very slight border to make the edge of the paper a bit less harsh and more real */
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+}
+
 /* roll button */
 .button_container {
     margin-top: 3rem;
@@ -24,11 +38,16 @@ body {
     font-size: 2rem;
 }
 
+#instructions {
+    position: absolute;
+    bottom: -3.5rem;
+    background-color: rgba(255, 255, 255, 0.3);
+}
 
 /* dice */
 #dice_container {
     margin-top: 4rem;
-    margin-left: 20rem;
+    /* margin-left: 20rem; */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
