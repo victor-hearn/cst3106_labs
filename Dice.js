@@ -8,13 +8,38 @@ const dieFace6 = "<div class=\"pip top-left\"></div> <div class=\"pip top-right\
 
 let faceValues = [dieFace1, dieFace2, dieFace3, dieFace4, dieFace5, dieFace6];
 
+let diceValues = [0, 0, 0, 0, 0];
+
+let held = [false, false, false, false, false];
+
 function roll() {
-    let diceValues = [1, 1, 1, 1, 1];
-    for (let i = 0; i < diceValues.length; i++) {
-        diceValues[i] = Math.floor(Math.random() * 6);
+    if (gameState.rollsLeft > 0) {
+        for (let i = 0; i < diceValues.length; i++) {
+            if (!held[i]) {
+                diceValues[i] = Math.floor(Math.random() * 6);
+            }
+        }
+        updateDiceFaces(diceValues);
+
+        gameState.rollsLeft--;
+        document.getElementById("roll").innerHTML = "<strong>Roll " + gameState.rollsLeft + "/3</strong>"
     }
-    updateDiceFaces(diceValues);
-    calculateScore(diceValues);
+}
+
+function hold(die) {
+    if (!held[die - 1]) {
+        //console.log("die"+die+"; Held: " + held[die-1])
+        held[die - 1] = true
+        document.getElementById("die" + die).style = "border: 5px solid yellow;"
+    } else {
+        //console.log("die"+die+"; Held: " + held[die-1])
+        unhold(die);
+    }
+}
+
+function unhold(die) {
+    held[die - 1] = false
+    document.getElementById("die" + die).style = "border: none;"
 }
 
 function updateDiceFaces(values) {
@@ -26,7 +51,7 @@ function updateDiceFaces(values) {
         document.getElementById("die5")
     ];
 
-    for (let i =0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
         dice[i].innerHTML = faceValues[values[i]];
     }
 
@@ -68,4 +93,8 @@ async function animateDice() {
         roll()
         await sleep(100);
     }
+}
+
+function getDiceValues() {
+    return diceValues;
 }

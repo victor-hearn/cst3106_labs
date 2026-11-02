@@ -37,8 +37,8 @@ body {
 }
 
 .die {
-    min-width: 100px;
-    min-height: 100px;
+    width: 100px;
+    height: 100px;
     background-color:  var(--colour-die);
     position: relative;
     border-radius: 15%;

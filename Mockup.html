@@ -9,31 +9,35 @@
     <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
     <script src="YahtzeeEngine.js"></script>
     <script src="Dice.js"></script>
+    <script src="YahtzeeGame.js"></script>
 </head>
 
 <body>
     <div style="display: flex; justify-content: space-around;">
         <div id="dice_container">
-            <div class="die" id="die1">
+            <div class="die" id="die1" onclick="hold(1)">
                 <div class="pip middle"></div>
             </div>
-            <div class="die" id="die2">
+            <div class="die" id="die2" onclick="hold(2)">
                 <div class="pip middle"></div>
             </div>
-            <div class="die" id="die3">
+            <div class="die" id="die3" onclick="hold(3)">
                 <div class="pip middle"></div>
             </div>
-            <div class="die" id="die4">
+            <div class="die" id="die4" onclick="hold(4)">
                 <div class="pip middle"></div>
             </div>
-            <div class="die" id="die5">
+            <div class="die" id="die5" onclick="hold(5)">
                 <div class="pip middle"></div>
             </div>
-            <button id="roll" onclick="roll()"><strong>Roll</strong></button>
+            <button id="roll" onclick="roll()"><strong>Roll 0/3</strong></button>
         </div>
 
         <div class="score_tables_container">
-            <h1>Yahtzee!</h1>
+            <div style="display: flex; justify-content: space-around;">
+                <h1>Yahtzee!</h1>
+                <button onclick="startNewGame()">New Game</button>
+            </div>
             <table id="upper_section">
                 <tr class="titles">
                     <th>Upper Section</th>
@@ -80,7 +84,7 @@
                 <tr>
                     <td>Sixes</td>
                     <td>Count and Add<br>Only Sixes</td>
-                    <td class="score current" id="sixes" onclick="isValidSelection('sixes')"></td>
+                    <td class="score current" id="sixes"></td>
                     <td class="score">24</td>
                     <td class="score">18</td>
                 </tr>
