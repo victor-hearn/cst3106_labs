@@ -30,6 +30,24 @@ function roll() {
     }
 }
 
+function rollDice() {
+    if (gameState.round == 0){
+        return;
+    } else if (gameState.rollsLeft > 0) {
+        for (let i = 0; i < diceValues.length; i++) {
+            if (!held[i]) {
+                diceValues[i] = Math.floor(Math.random() * 6);
+            }
+        }
+        updateDiceFaces(diceValues);
+
+        gameState.rollsLeft--;
+        document.getElementById("roll").innerHTML = "<strong>Roll " + gameState.rollsLeft + "/3</strong>"
+    } else {
+        document.getElementById("instructions").innerHTML = "Click a score box to end the round";
+    }
+}
+
 function hold(die) {
     if (!held[die - 1]) {
         //console.log("die"+die+"; Held: " + held[die-1])
