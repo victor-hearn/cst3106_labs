@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="YahtzeeEngine.js"></script>
     <script src="Dice.js"></script>
     <script src="YahtzeeGame.js"></script>
@@ -20,22 +21,22 @@
     </div>
     <div style="display: flex; justify-content: space-around;">
         <div id="dice_container">
-            <div class="die" id="die1" onclick="hold(1)">
+            <div class="die" id="die1" onclick="holdDie(1)">
                 <div class="pip middle"></div>
             </div>
-            <div class="die" id="die2" onclick="hold(2)">
+            <div class="die" id="die2" onclick="holdDie(2)">
                 <div class="pip middle"></div>
             </div>
-            <div class="die" id="die3" onclick="hold(3)">
+            <div class="die" id="die3" onclick="holdDie(3)">
                 <div class="pip middle"></div>
             </div>
-            <div class="die" id="die4" onclick="hold(4)">
+            <div class="die" id="die4" onclick="holdDie(4)">
                 <div class="pip middle"></div>
             </div>
-            <div class="die" id="die5" onclick="hold(5)">
+            <div class="die" id="die5" onclick="holdDie(5)">
                 <div class="pip middle"></div>
             </div>
-            <button id="roll" onclick="roll()"><strong>Roll 0/3</strong></button>
+            <button id="roll" onclick="rollDice()"><strong>Roll 0/3</strong></button>
             <p id="instructions">Click "New Game" to start</p>
         </div>
 

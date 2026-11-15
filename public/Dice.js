@@ -12,8 +12,17 @@ let diceValues = [0, 0, 0, 0, 0];
 
 let held = [false, false, false, false, false];
 
+let dice = [
+    document.getElementById("die1"),
+    document.getElementById("die2"),
+    document.getElementById("die3"),
+    document.getElementById("die4"),
+    document.getElementById("die5")
+];
+
+//old js only method
 function roll() {
-    if (gameState.round == 0){
+    if (gameState.round == 0) {
         return;
     } else if (gameState.rollsLeft > 0) {
         for (let i = 0; i < diceValues.length; i++) {
@@ -30,24 +39,33 @@ function roll() {
     }
 }
 
-function rollDice() {
-    if (gameState.round == 0){
-        return;
-    } else if (gameState.rollsLeft > 0) {
-        for (let i = 0; i < diceValues.length; i++) {
-            if (!held[i]) {
-                diceValues[i] = Math.floor(Math.random() * 6);
-            }
-        }
-        updateDiceFaces(diceValues);
 
-        gameState.rollsLeft--;
-        document.getElementById("roll").innerHTML = "<strong>Roll " + gameState.rollsLeft + "/3</strong>"
-    } else {
-        document.getElementById("instructions").innerHTML = "Click a score box to end the round";
+//new method for node.js
+async function rollDice() {
+    try {
+        let response = await fetch("/roll-dice");
+        let data = await response.json();
+        
+        switch (typeof data) {
+            case "string":
+                console.log("string");
+                $("#instructions").text(data);
+                break;
+            case "object":
+                console.log("object");
+                updateDiceFaces(data);
+                break;
+            case "boolean":
+                console.log("boolean");
+                break;
+        } 
+
+    } catch (error) {
+        console.error('Error:', error);
     }
 }
 
+//old js only method
 function hold(die) {
     if (!held[die - 1]) {
         //console.log("die"+die+"; Held: " + held[die-1])
@@ -55,24 +73,24 @@ function hold(die) {
         document.getElementById("die" + die).style = "border: 5px solid yellow;"
     } else {
         //console.log("die"+die+"; Held: " + held[die-1])
-        unhold(die);
+        held[die - 1] = false
+        document.getElementById("die" + die).style = "border: none;"
     }
 }
 
-function unhold(die) {
-    held[die - 1] = false
-    document.getElementById("die" + die).style = "border: none;"
+
+//new method for node.js
+async function holdDie(die) {
+    try {
+        let response = await fetch("/hold-unhold-dice/" + die); 
+        let data = await response.json();
+        $("#die" + die).css("border", data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 function updateDiceFaces(values) {
-    let dice = [
-        document.getElementById("die1"),
-        document.getElementById("die2"),
-        document.getElementById("die3"),
-        document.getElementById("die4"),
-        document.getElementById("die5")
-    ];
-
     for (let i = 0; i < 5; i++) {
         dice[i].innerHTML = faceValues[values[i]];
     }
@@ -80,13 +98,6 @@ function updateDiceFaces(values) {
 }
 
 function updateDiceHTML(hidden) {
-    let dice = [
-        document.getElementById("die1"),
-        document.getElementById("die2"),
-        document.getElementById("die3"),
-        document.getElementById("die4"),
-        document.getElementById("die5")
-    ];
     let btn = document.getElementById("roll");
 
     for (let i = 0; i < 5; i++) {
