@@ -8,8 +8,9 @@ const dieFace6 = "<div class=\"pip top-left\"></div> <div class=\"pip top-right\
 
 let faceValues = [dieFace1, dieFace2, dieFace3, dieFace4, dieFace5, dieFace6];
 
+//old
 let diceValues = [0, 0, 0, 0, 0];
-
+//old
 let held = [false, false, false, false, false];
 
 //old js only method
@@ -37,14 +38,13 @@ async function rollDice() {
         let response = await fetch("/roll-dice");
         let data = await response.json();
 
-        console.log(data);
-
         switch (typeof data) {
             case "string":
                 $("#instructions").text(data);
                 break;
             case "object":
-                updateDiceFaces(data);
+                updateDiceFaces(data.values);
+                $("#roll").html("<strong>Roll " + data.rolls + "/3</strong>")
                 break;
             case "boolean":
                 break;
@@ -58,11 +58,9 @@ async function rollDice() {
 //old js only method
 function hold(die) {
     if (!held[die - 1]) {
-        //console.log("die"+die+"; Held: " + held[die-1])
         held[die - 1] = true
         document.getElementById("die" + die).style = "border: 5px solid yellow;"
     } else {
-        //console.log("die"+die+"; Held: " + held[die-1])
         held[die - 1] = false
         document.getElementById("die" + die).style = "border: none;"
     }
@@ -86,17 +84,15 @@ function updateDiceFaces(values) {
 
 }
 
-//currently unused
+//currently unused + old
 function updateDiceHTML(hidden) {
     let btn = $("#roll");
 
     for (let i = 0; i < 5; i++) {
         die = $("#die" + (i + 1));
         if (hidden) {
-            console.log("hidden: true");
             die.css({"top": "0", "opacity": "1"});
         } else {
-            console.log("hidden: false");
             die.css({"top": ((btn.offset().top - die.offset().top) + "px"), "opacity": "0"});
         }
     }

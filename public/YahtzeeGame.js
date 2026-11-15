@@ -44,7 +44,8 @@ let bestGame = {
     total: 0
 }
 
-function startNewGame() {
+//old function
+function oldStartNewGame() {
     document.getElementById("endScreen").style = "display: none";
     document.querySelectorAll('.current').forEach(slot => slot.addEventListener('click', endRound));
     let scoreBoxes = document.getElementsByClassName("current");
@@ -82,8 +83,43 @@ function startNewGame() {
     document.getElementById("instructions").innerHTML = "";
 }
 
+//new function for node.js + jquery
+async function startNewGame() {
+    try {
+        //reset gamestate
+        let response = await fetch("/new-game");
+        let gameStateData = await response.json();
+
+        updateDiceFaces(gameStateData.diceValues);
+
+        //reset html elements
+
+        //hide end screen
+        $("#endScreen").css("display", "none");
+
+        //add event listner to all "current" score boxes
+        $(".current").on('click', endRound);
+
+        $(".current").html("");
+
+        $("#upper_subtotal").html("");
+        $("#bonus").html("");
+        $("#upper_total").html("");
+
+        $("#upper_total2").html("");
+        $("#lower_total").html("");
+        $("#grand_total").html("");
+
+        $("#roll").html("<strong>Roll " + gameStateData.rollsLeft + "/3</strong>");
+        $("#instructions").html("");
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
 function endRound(e) {
-    // console.log("endRound Called");
+    
     const roundScore = calculateScore(getDiceValues().toSorted(), e.currentTarget);
     e.currentTarget.innerHTML = roundScore;
 
