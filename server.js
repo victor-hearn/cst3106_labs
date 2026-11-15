@@ -65,7 +65,6 @@ app.get('/roll-dice', (req, res) => {
 
 app.get('/hold-unhold-dice/:die', (req, res) => {
     die = req.params.die;
-    console.log(die);
     if (!gameState.held[die - 1]) {
         //console.log("die"+die+"; Held: " + held[die-1])
         gameState.held[die - 1] = true
@@ -79,7 +78,7 @@ app.get('/hold-unhold-dice/:die', (req, res) => {
 });
 
 app.get('/dice-values', (req, res) => {
-
+    res.json(gameState.diceValues);
 });
 
 app.get('/calc-score', (req, res) => {
@@ -98,7 +97,7 @@ app.get('/end-game', (req, res) => {
 
 });
 
-app.get('/get-game=scores', (req, res) => {
+app.get('/get-game-scores', (req, res) => {
 
 });
 

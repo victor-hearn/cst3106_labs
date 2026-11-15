@@ -39,7 +39,6 @@ function roll() {
     }
 }
 
-
 //new method for node.js
 async function rollDice() {
     try {
@@ -77,7 +76,6 @@ function hold(die) {
         document.getElementById("die" + die).style = "border: none;"
     }
 }
-
 
 //new method for node.js
 async function holdDie(die) {
@@ -128,6 +126,11 @@ async function animateDice() {
     }
 }
 
-function getDiceValues() {
-    return diceValues;
+async function getDiceValues() {
+    try {
+        let response = await fetch("/dice-values");
+        return response.json();
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
