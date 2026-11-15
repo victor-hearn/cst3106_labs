@@ -32,7 +32,7 @@ let gameState = {
     bonus: false,
     scoreLower: 0,
     scoreTotal: 0,
-    rollsLeft: 0,
+    rollsLeft: 99999,
     diceValues: [5, 0, 0, 0, 0],
     held: [false, false, false, false, false]
 };

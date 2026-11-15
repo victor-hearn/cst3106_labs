@@ -12,14 +12,6 @@ let diceValues = [0, 0, 0, 0, 0];
 
 let held = [false, false, false, false, false];
 
-let dice = [
-    document.getElementById("die1"),
-    document.getElementById("die2"),
-    document.getElementById("die3"),
-    document.getElementById("die4"),
-    document.getElementById("die5")
-];
-
 //old js only method
 function roll() {
     if (gameState.round == 0) {
@@ -44,20 +36,19 @@ async function rollDice() {
     try {
         let response = await fetch("/roll-dice");
         let data = await response.json();
-        
+
+        console.log(data);
+
         switch (typeof data) {
             case "string":
-                console.log("string");
                 $("#instructions").text(data);
                 break;
             case "object":
-                console.log("object");
                 updateDiceFaces(data);
                 break;
             case "boolean":
-                console.log("boolean");
                 break;
-        } 
+        }
 
     } catch (error) {
         console.error('Error:', error);
@@ -80,7 +71,7 @@ function hold(die) {
 //new method for node.js
 async function holdDie(die) {
     try {
-        let response = await fetch("/hold-unhold-dice/" + die); 
+        let response = await fetch("/hold-unhold-dice/" + die);
         let data = await response.json();
         $("#die" + die).css("border", data);
     } catch (error) {
@@ -90,26 +81,29 @@ async function holdDie(die) {
 
 function updateDiceFaces(values) {
     for (let i = 0; i < 5; i++) {
-        dice[i].innerHTML = faceValues[values[i]];
+        $("#die" + (i + 1)).html(faceValues[values[i]]);
     }
 
 }
 
+//currently unused
 function updateDiceHTML(hidden) {
-    let btn = document.getElementById("roll");
+    let btn = $("#roll");
 
     for (let i = 0; i < 5; i++) {
+        die = $("#die" + (i + 1));
         if (hidden) {
             console.log("hidden: true");
-            dice[i].style = "top: 0; opacity: 1;";
+            die.css({"top": "0", "opacity": "1"});
         } else {
             console.log("hidden: false");
-            dice[i].style = "top: " + (btn.getBoundingClientRect().top - dice[i].getBoundingClientRect().top) + "px; opacity: 0;";
+            die.css({"top": ((btn.offset().top - die.offset().top) + "px"), "opacity": "0"});
         }
     }
 
 }
 
+//currently unused + old
 async function animateDice() {
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     updateDiceHTML(false);
@@ -126,6 +120,12 @@ async function animateDice() {
     }
 }
 
+//old js only method
+function oldGetDiceValues() {
+    return diceValues;
+}
+
+//new method for node.js
 async function getDiceValues() {
     try {
         let response = await fetch("/dice-values");
