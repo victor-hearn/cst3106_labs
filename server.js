@@ -7,8 +7,8 @@ const PORT = 3000;
 let gameState = {
     round: 1,
     player: "",
-    rollsLeft: 99999,
-    diceValues: [5, 0, 0, 0, 0],
+    rollsLeft: 3,
+    diceValues: [0, 0, 0, 0, 0],
     held: [false, false, false, false, false],
     gameScores: {
         ones: 0,
@@ -34,7 +34,7 @@ let gameState = {
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    fs.readFile('public/mockup.html', function (err, data) {
+    fs.readFile('public/Mockup.html', function (err, data) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(data);
         return res.end();
@@ -145,6 +145,8 @@ app.get('/calc-score/:box', (req, res) => {
             for (let i = 0; i < counts.length; i++) {
                 if (counts[i] > 1) {
                     score = 0;
+                    res.json(score);
+                    return;
                 }
             }
             score = 40;
@@ -205,9 +207,9 @@ app.get('/end-round/:table/:roundScore', (req, res) => {
 
         const roundScore = parseInt(req.params.roundScore);
 
-        if (req.params.table) {
+        if (req.params.table === "1") {
             gameState.gameScores.upperScore += roundScore;
-            if (gameState.gameScores.upperScore >= 63) {
+            if (gameState.gameScores.upperScore >= 63 && !gameState.gameScores.bonus) {
                 gameState.gameScores.bonus = true;
                 gameState.gameScores.upperScore += 35;
             }
@@ -229,7 +231,7 @@ app.get('/end-round/:table/:roundScore', (req, res) => {
 });
 
 app.get('/end-game', (req, res) => {
-
+    res.json(gameState.gameScores.totalScore);
 });
 
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
