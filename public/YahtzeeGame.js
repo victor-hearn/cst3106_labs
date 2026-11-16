@@ -1,4 +1,4 @@
-let gameState = {
+let oldGameState = {
     round: 0,
     player: "",
     scoreUpper: 0,
@@ -94,11 +94,18 @@ async function startNewGame() {
 
         //reset html elements
 
+        //unhold all dice
+        for (let i = 0; i < gameStateData.held.length; i++) {
+            let response = await fetch("/hold-unhold-dice/" + i + "?reset=true");
+            let data = await response.json();
+            $("#die" + (i + 1)).css("border", data);
+        }
+
         //hide end screen
         $("#endScreen").css("display", "none");
 
         //add event listner to all "current" score boxes
-        $(".current").on('click', endRound);
+        $(".current").off('click').on('click', endRound);
 
         $(".current").html("");
 
@@ -118,8 +125,9 @@ async function startNewGame() {
     }
 }
 
-function endRound(e) {
-    
+//old
+function oldEndRound(e) {
+    // console.log("endRound Called");
     const roundScore = calculateScore(getDiceValues().toSorted(), e.currentTarget);
     e.currentTarget.innerHTML = roundScore;
 
@@ -155,6 +163,54 @@ function endRound(e) {
         gameState.rollsLeft = 3;
         document.getElementById("roll").innerHTML = "<strong>Roll " + gameState.rollsLeft + "/3</strong>"
         document.getElementById("instructions").innerHTML = "";
+    }
+}
+
+//new for node.js
+async function endRound(e) {
+    try {
+        
+        let gameStateResponse = await fetch("/game-state");
+        let gameState = await gameStateResponse.json();
+
+        const roundScore = await calculateScore($(this));
+        
+        let endRoundResponse = await fetch("/end-round/" + $("#upper_section").has(this).length + "/" + roundScore);
+        gameState = await endRoundResponse.json();
+
+        $(this).off('click');
+        
+        $(this).text(roundScore);
+
+        if ($("#upper_section").has(this).length) {
+            $("#upper_subtotal").text(gameState.gameScores.upperScore);
+            if (gameState.gameScores.bonus) {
+                $("#bonus").text(35);
+            }
+            $("#upper_total").text(gameState.gameScores.upperScore);
+            $("#upper_total2").text(gameState.gameScores.upperScore);
+        } else if ($("#lower_section").has(this).length) {
+            
+            $("#lower_total").text(gameState.gameScores.lowerScore);
+        }
+
+        $("#grand_total").text(gameState.gameScores.totalScore);
+
+        //reset dice
+        for (let i = 0; i < gameState.held.length; i++) {
+            let response = await fetch("/hold-unhold-dice/" + i + "?reset=true");
+            let data = await response.json();
+            $("#die" + (i + 1)).css("border", data);
+        }
+
+        diceValues = [0, 0, 0, 0, 0]
+        updateDiceFaces(diceValues);
+
+        if (gameState.round > 13) {
+            endGame();
+        }
+    } catch (error) {
+        console.error('Error:', error);
     }
 }
 

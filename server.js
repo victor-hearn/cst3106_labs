@@ -51,7 +51,7 @@ app.get('/roll-dice', (req, res) => {
             }
         }
         gameState.rollsLeft--;
-        res.json({values: gameState.diceValues, rolls: gameState.rollsLeft});
+        res.json({ values: gameState.diceValues, rolls: gameState.rollsLeft });
     } else {
         res.json("Click a score box to end the round");
     }
@@ -59,116 +59,113 @@ app.get('/roll-dice', (req, res) => {
 
 app.get('/hold-unhold-dice/:die', (req, res) => {
     die = req.params.die;
-    if (!gameState.held[die - 1]) {
+    if (!gameState.held[die - 1] && !req.query.reset) {
         gameState.held[die - 1] = true
         res.json("5px solid yellow");
     } else {
         gameState.held[die - 1] = false
         res.json("none");
     }
-    res.json();
 });
 
-app.get('/dice-values', (req, res) => {
-    res.json(gameState.diceValues);
+app.get('/game-state', (req, res) => {
+    res.json(gameState);
 });
 
-app.get('/calc-score', (req, res) => {
+app.get('/calc-score/:box', (req, res) => {
     //will calculate the score based on the dice values and the box provided, then update that, boxes html
     let score = 0;
-    if (isValidSelection(box)) {
 
-        const counts = [0, 0, 0, 0, 0, 0];
+    const counts = [0, 0, 0, 0, 0, 0];
 
-        diceValues.forEach(val => {
-            counts[val]++;
-        });
+    gameState.diceValues.forEach(val => {
+        counts[val]++;
+    });
 
 
-        switch (box.id) {
-            //upper
-            case "ones":
-                score = counts[0];
-                break;
-            case "twos":
-                score = counts[1] * 2;
-                break;
-            case "threes":
-                score = counts[2] * 3;
-                break;
-            case "fours":
-                score = counts[3] * 4;
-                break;
-            case "fives":
-                score = counts[4] * 5;
-                break;
-            case "sixes":
-                score = counts[5] * 6;
-                break;
-            //lower
-            case "toak":
-                for (let i = 0; i < counts.length; i++) {
-                    if (counts[i] >= 3) {
-                        score = (i + 1) * 3
-                        break;
-                    }
+    switch (req.params.box) {
+        //upper
+        case "ones":
+            score = counts[0];
+            break;
+        case "twos":
+            score = counts[1] * 2;
+            break;
+        case "threes":
+            score = counts[2] * 3;
+            break;
+        case "fours":
+            score = counts[3] * 4;
+            break;
+        case "fives":
+            score = counts[4] * 5;
+            break;
+        case "sixes":
+            score = counts[5] * 6;
+            break;
+        //lower
+        case "toak":
+            for (let i = 0; i < counts.length; i++) {
+                if (counts[i] >= 3) {
+                    score = (i + 1) * 3
+                    break;
                 }
-                break;
-            case "foak":
-                for (let i = 0; i < counts.length; i++) {
-                    if (counts[i] >= 4) {
-                        score = (i + 1) * 4
-                        break;
-                    }
+            }
+            break;
+        case "foak":
+            for (let i = 0; i < counts.length; i++) {
+                if (counts[i] >= 4) {
+                    score = (i + 1) * 4
+                    break;
                 }
-                break;
-            case "full_house":
-                if (counts.includes(3) && counts.includes(2)) {
-                    score = ((counts.indexOf(3) + 1) * 3) + ((counts.indexOf(2) + 1) * 2)
-                    if (score < 25) {
-                        score = 25;
-                    }
+            }
+            break;
+        case "full_house":
+            if (counts.includes(3) && counts.includes(2)) {
+                score = ((counts.indexOf(3) + 1) * 3) + ((counts.indexOf(2) + 1) * 2)
+                if (score < 25) {
+                    score = 25;
                 }
-                break;
-            case "sm_straight":
-                for (let start = 0; start <= 2; start++) {
-                    if (
-                        counts[start] > 0 &&
-                        counts[start + 1] > 0 &&
-                        counts[start + 2] > 0 &&
-                        counts[start + 3] > 0
-                    ) {
-                        score = 30;
-                        break;
-                    }
+            }
+            break;
+        case "sm_straight":
+            for (let start = 0; start <= 2; start++) {
+                if (
+                    counts[start] > 0 &&
+                    counts[start + 1] > 0 &&
+                    counts[start + 2] > 0 &&
+                    counts[start + 3] > 0
+                ) {
+                    score = 30;
+                    break;
                 }
-                break;
-            case "lg_straight":
-                for (let i = 0; i < counts.length; i++) {
-                    if (counts[i] > 1) {
-                        return 0;
-                    }
+            }
+            break;
+        case "lg_straight":
+            for (let i = 0; i < counts.length; i++) {
+                if (counts[i] > 1) {
+                    score = 0;
                 }
-                score = 40;
-                break;
-            case "yahtzee":
-                if (counts.includes(5)) {
-                    score = 50;
-                }
-                break;
-            case "chance":
-                diceValues.forEach(val => {
-                    score += val + 1;
-                });
-                break;
-            default:
-                console.log("invalid selection");
-                break;
-        }
-        return score;
-    } else {
-        console.log("invalid");
+            }
+            score = 40;
+            break;
+        case "yahtzee":
+            if (counts.includes(5)) {
+                score = 50;
+            }
+            break;
+        case "chance":
+            gameState.diceValues.forEach(val => {
+                score += val + 1;
+            });
+            break;
+        default:
+            console.log("invalid selection");
+            break;
     }
+
+    res.json(score);
+
 });
 
 app.get('/new-game', (req, res) => {
@@ -203,15 +200,35 @@ app.get('/new-game', (req, res) => {
     res.json(gameState);
 });
 
-app.get('/end-round', (req, res) => {
+app.get('/end-round/:table/:roundScore', (req, res) => {
+    try {
 
+        const roundScore = parseInt(req.params.roundScore);
+
+        if (req.params.table) {
+            gameState.gameScores.upperScore += roundScore;
+            if (gameState.gameScores.upperScore >= 63) {
+                gameState.gameScores.bonus = true;
+                gameState.gameScores.upperScore += 35;
+            }
+        } else {
+            gameState.gameScores.lowerScore += roundScore;
+        }
+
+        gameState.gameScores.totalScore = gameState.gameScores.lowerScore + gameState.gameScores.upperScore;
+
+        gameState.diceValues = [0, 0, 0, 0, 0]
+
+        gameState.round++;
+        gameState.rollsLeft = 3;
+
+        res.json(gameState);
+    } catch (error) {
+        console.error('Error:', error);
+    }
 });
 
 app.get('/end-game', (req, res) => {
-
-});
-
-app.get('/get-game-scores', (req, res) => {
 
 });
 

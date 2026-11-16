@@ -117,16 +117,6 @@ async function animateDice() {
 }
 
 //old js only method
-function oldGetDiceValues() {
+function getDiceValues() {
     return diceValues;
-}
-
-//new method for node.js
-async function getDiceValues() {
-    try {
-        let response = await fetch("/dice-values");
-        return response.json();
-    } catch (error) {
-        console.error('Error:', error);
-    }
 }
