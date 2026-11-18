@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8">
-    <title>Victor Hearn Resume</title>
+    <title>Yahtzee Game Overview</title>
     <link rel="stylesheet" href="styles.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
 </head>
@@ -30,7 +30,414 @@
 
 
     <main class="content">
-        <a class="navbar_button" href="http://localhost:3000/">Yhatzee</a>
+        <a href="http://localhost:3000/">Link to Yhatzee game.</a>
+        <p style="margin-top: 0;">*Requires running "node server.js" in a terminal in the directory containing this page
+            first.</p>
+        <h2>Yahtzee Game Design Documentation</h2>
+        <p>The following is the design details for the Yahtzee game built to be played on a webpage. It outlines the
+            rules of the game, as well as the colours, fonts, specific designs and static HTML/CSS mockups of the page.
+        </p>
+        <p>The rules for this game are primarily based on the Hasbro-owned version of <strong>Yahtzee</strong>, with
+            slight adjustments to the scoring rules from the European-based version of <strong>Yatzy</strong>.</p>
+        <p><strong>General Design Idea:</strong> Made to look like it is being played at home on the dining room table.
+            The game should feel comfortable, like it is being played for family game night.<br>
+            <em>Note that despite being made to look like family game night, the page remains a single player version of
+                the game.</em>
+        </p>
+
+        <hr>
+
+        <!-- ========== Overview ========== -->
+        <section id="doc-overview">
+            <h3>Overview of the Game</h3>
+            <p>Yahtzee is a game of dice, which has an element of both luck and strategy.</p>
+        </section>
+
+        <!-- ========== Rules ========== -->
+        <section id="doc-rules">
+            <h3>Rules</h3>
+
+            <h4>Rounds</h4>
+            <ul>
+                <li>Each round the player may roll the dice up to three times.</li>
+                <li>After each roll the player may choose to hold specific dice. These dice remain held until the next
+                    round begins.</li>
+                <li>After the player's third roll they must choose an empty box on the scorecard to fill in their score.
+                </li>
+                <li>If the dice combination does not align with any empty boxes, the player must choose a box to fill
+                    with a 0.</li>
+                <li>The player may choose to fill a box with their score after their first or second roll if they
+                    desire, thus ending the round early.</li>
+                <li>Each box may only be used once, and the game ends when all 13 boxes are filled.</li>
+            </ul>
+
+            <h4>Scoring</h4>
+
+            <h5>Upper Section</h5>
+            <table>
+                <caption>Upper section scoring</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Box</th>
+                        <th scope="col">Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ones - Sixes</td>
+                        <td>Sum of the dice showing that number</td>
+                    </tr>
+                    <tr>
+                        <td>Bonus</td>
+                        <td>+35 if the upper section totals 63 or more</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Lower Section</h5>
+            <table>
+                <caption>Lower section scoring</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Box</th>
+                        <th scope="col">Requirement</th>
+                        <th scope="col">Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3 of a kind</td>
+                        <td>Three dice of the same number</td>
+                        <td>Add up total of the 3 matching dice</td>
+                    </tr>
+                    <tr>
+                        <td>4 of a kind</td>
+                        <td>Four dice of the same number</td>
+                        <td>Add up total of the 4 matching dice</td>
+                    </tr>
+                    <tr>
+                        <td>Full House</td>
+                        <td>Three of a kind and a different pair</td>
+                        <td>25 points, or total of the dice</td>
+                    </tr>
+                    <tr>
+                        <td>Small Straight</td>
+                        <td>Any four numbers in sequence</td>
+                        <td>30 points</td>
+                    </tr>
+                    <tr>
+                        <td>Big Straight</td>
+                        <td>Any five numbers in sequence</td>
+                        <td>40 points</td>
+                    </tr>
+                    <tr>
+                        <td>Yahtzee</td>
+                        <td>All five dice are the same number</td>
+                        <td>50 points</td>
+                    </tr>
+                    <tr>
+                        <td>Chance</td>
+                        <td>Anything</td>
+                        <td>Total of all the dice</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Final Score</h5>
+            <p>When all 13 boxes are filled, the player's final score is the total of the upper section, plus the bonus,
+                plus the total of the lower section.</p>
+        </section>
+
+        <!-- ========== Design System ========== -->
+        <section id="doc-design-system">
+            <h3>Design System</h3>
+
+            <h4>Colour Palette</h4>
+            <p>Most of the page is made using images. This gets much closer to the "game night at the kitchen table"
+                vibe than would be possible using only traditional colours.</p>
+            <table>
+                <caption>Colour palette</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Colour</th>
+                        <th scope="col">Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Black (#000000)</td>
+                        <td>Most text, most shadows, pips</td>
+                    </tr>
+                    <tr>
+                        <td>White (#ffffff)</td>
+                        <td>Small inset shadow on pips</td>
+                    </tr>
+                    <tr>
+                        <td>#000050</td>
+                        <td>Score text</td>
+                    </tr>
+                    <tr>
+                        <td>#fcf7eb</td>
+                        <td>Dice</td>
+                    </tr>
+                    <tr>
+                        <td>#F9FBFF</td>
+                        <td>Paper background</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Reasoning</h5>
+            <p><strong>Black:</strong> Most of the time printers use black ink for text and tables. The pips on the dice
+                most people own are black. Using black for shadows with varying transparency looks like the object is
+                actually blocking light.</p>
+            <p><strong>White:</strong> A slight white inset shadow makes the pips look carved into the dice instead of
+                flat prints on top, imitating the light reflections we see in real life.</p>
+            <p><strong>#000050:</strong> Keeping with the family game night and paper theme, many pens are a dark blue
+                colour. Matched with the Kalam font, it is more convincing that the scores are written and not computer
+                printed.</p>
+            <p><strong>#fcf7eb:</strong> Dice that have been used for a while are slightly off-white. This gives them
+                the aged look most people are familiar with.</p>
+            <p><strong>#F9FBFF:</strong> Specifying the paper background colour lets the paper image blend slightly, so
+                it has both the texture of the image and the slight off-white of old paper. It differs from the dice
+                colour because paper and dice discolour differently.</p>
+
+            <h5>Background</h5>
+            <p>The background is a picture of a table, again to give the family game night vibe.</p>
+
+            <h4>Fonts</h4>
+            <table>
+                <caption>Fonts</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Use</th>
+                        <th scope="col">Font</th>
+                        <th scope="col">Style</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Main/scorecard</td>
+                        <td>Inter</td>
+                        <td>Default</td>
+                    </tr>
+                    <tr>
+                        <td>Points</td>
+                        <td>Kalam</td>
+                        <td>Default, dark blue</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5>Reasoning</h5>
+            <p><strong>Inter:</strong> Inter is a fairly generic font, which makes it more believable that a family went
+                through all their original Yahtzee sheets and had to print more they found on the internet.</p>
+            <p><strong>Kalam:</strong> Kalam is meant to look like handwriting. In dark blue for the points, it is more
+                convincing that a game is being played and the scores are being written down as it goes.</p>
+
+            <h4>Design Comments</h4>
+            <h5>Overall Layout</h5>
+            <p>I chose to keep as much of the content as possible looking like real objects, to give the illusion of the
+                game being played in real life as opposed to on a website.</p>
+
+            <h5>Possible Interactions and Animations</h5>
+            <ul>
+                <li>I plan on having the dice animated in some way, likely not 3D rolling, but at least making the pips
+                    cycle through a couple of random faces before settling in their final place. I'll likely do this by
+                    performing the roll step in JavaScript more times.</li>
+                <li>I plan on slightly moving the held dice in some way to make it clear they are not being rerolled.
+                </li>
+                <li>I plan on having the roll button look like the cup that often comes with Yahtzee, which the user
+                    clicks to roll the dice.</li>
+                <li>I plan on trying to animate the scores being written in, as if a person is writing them with a pen.
+                    There will also be a pen somewhere on the table.</li>
+                <li>I'd like to animate the roll so the dice are put into the cup, shaken, and thrown back out, but am
+                    unsure of the feasibility within the time constraints.</li>
+            </ul>
+        </section>
+
+        <section id="technical-documentation" aria-labelledby="tech-heading">
+            <h2 id="tech-heading">Technical Documentation</h2>
+            <p>
+                The Yatzy game was built in two stages. Assignment #1 produced the design
+                and a static mockup. Assignment #2 added a Node.js and Express server, so
+                the game logic and game state now live on the server and the browser
+                displays the result.
+            </p>
+
+            <!-- Technology list: each item is "technology + how it was used" -->
+            <h3>Key Technologies and Techniques</h3>
+            <ul class="tech-list">
+                <li>
+                    <strong>Node.js &amp; NPM:</strong> Used to run the server-side
+                    environment and manage packages such as Express.
+                </li>
+                <li>
+                    <strong>Express.js:</strong> Used to create the server, serve the static
+                    <code>public</code> folder, and define the game's routes.
+                </li>
+                <li>
+                    <strong>Server-side game state:</strong> A single <code>gameState</code>
+                    object tracks the round, rolls left, dice values, held dice and all
+                    scores.
+                </li>
+                <li>
+                    <strong>JSON &amp; fetch API:</strong> Used to exchange data between the
+                    browser and the server.
+                </li>
+                <li>
+                    <strong>JavaScript asynchronous programming:</strong> <code>async</code>/<code>await</code>
+                    with <code>fetch</code> handles server responses (for example, rolling
+                    dice and calculating scores) without freezing the page.
+                </li>
+                <li>
+                    <strong>jQuery:</strong> Used for DOM manipulation and click event
+                    handling, such as updating dice faces and attaching listeners to the
+                    scorecard boxes.
+                </li>
+                <li>
+                    <strong>HTML &amp; CSS:</strong> Semantic markup and a custom stylesheet
+                    reproduce the paper scorecard, dice and table background from the
+                    design mockup.
+                </li>
+
+                <li>
+                    <strong>JavaScript &amp; CSS animation:</strong> Used for the highlight effect on held dice.
+                </li>
+                <li>
+                    <strong>VS Code:</strong> Primary code editor.
+                </li>
+                <li>
+                    <strong>GitHub:</strong> Version control and project tracking for the
+                    portfolio repository.
+                </li>
+            </ul>
+
+            <h3>Server Routes</h3>
+            <table class="route-table">
+                <caption>Express routes used by the game</caption>
+                <thead>
+                    <tr>
+                        <th>Route</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/roll-dice</code></td>
+                        <td>Rerolls all dice that are not held and decreases the rolls left.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/hold-unhold-dice/:die</code></td>
+                        <td>Toggles whether a die is held.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/calc-score/:box</code></td>
+                        <td>Calculates the score for a scorecard box from the current dice.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/end-round/:table/:roundScore</code></td>
+                        <td>Adds the score, applies the upper bonus, and starts the next round.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/game-state</code></td>
+                        <td>Returns the current game state.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/new-game</code></td>
+                        <td>Resets the game state.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/end-game</code></td>
+                        <td>Returns the final total score.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Code Organization</h3>
+            <p>
+                The project separates its responsibilities across files.
+            </p>
+            <ul>
+                <li><code>Server.js</code>: server, game state and scoring rules.</li>
+                <li><code>Dice.js</code>: dice faces, rolling and holding on the page.</li>
+                <li><code>YahtzeeEngine.js</code>: client helper that requests scores from the server.</li>
+                <li><code>YahtzeeGame.js</code>: starting a new game and resetting the interface.</li>
+                <li><code>Mockup.html</code> and <code>styles.css</code>: the page structure and appearance.</li>
+            </ul>
+
+            <h3>How a Roll Works</h3>
+            <ol>
+                <li>The player clicks the roll button.</li>
+                <li>The browser sends a <code>fetch</code> request to <code>/roll-dice</code>.</li>
+                <li>The server rerolls the dice that are not held and sends back JSON.</li>
+                <li>jQuery updates the dice faces and the rolls-left counter.</li>
+            </ol>
+        </section>
+
+        <section id="highlights-challenges" aria-labelledby="highlights-heading">
+            <h2 id="highlights-heading">Highlights &amp; Challenges</h2>
+
+            <h3>Highlights</h3>
+            <ul>
+                <li>
+                    <strong>Server-client interaction:</strong> Using <code>fetch</code> and
+                    Express gave the game a clear flow of data between the browser and the
+                    server.
+                </li>
+                <li>
+                    <strong>Asynchronous operations:</strong> <code>async</code>/<code>await</code>
+                    let dice rolls and score calculations run without interrupting the
+                    player.
+                </li>
+                <li>
+                    <strong>Theme:</strong> Realistic dice, a paper scorecard and a
+                    handwriting-style font for scores give the "family game night" feel.
+                </li>
+                <!-- OPTIONAL: keep only if your CSS includes media queries or flexbox layout -->
+                <li>
+                    <strong>Responsive design:</strong> The interface was built to stay
+                    usable across screen sizes.
+                </li>
+            </ul>
+
+            <h3>Challenges</h3>
+            <ul>
+                <li>
+                    <strong>Migrating from client only to server-client:</strong> Migrating from only client side
+                    javascript to client-server interaction with Node.js posed a unique challenge. The logic had to be
+                    split between the two sides depending on what it was doing, and some parts had to be reworked
+                    entirely.
+                </li>
+                <li>
+                    <strong>Moving logic to the server:</strong> Scoring and state had to be
+                    reorganized so the server is the single source of truth.
+                </li>
+                <li>
+                    <strong>Handling varied responses:</strong> The roll route can return
+                    dice values or a message when no rolls are left, so the client checks
+                    the response type before updating the page.
+                </li>
+                <li>
+                    <strong>Scoring rules:</strong> Details such as the full house minimum of
+                    25, the straight checks, and the +35 bonus at 63 points needed careful
+                    testing.
+                </li>
+                <li>
+                    <strong>Resetting the game:</strong> A new game has to reset both the
+                    server state and the interface (dice, holds, scorecard and end screen).
+                </li>
+            </ul>
+
+            <h3>Future Improvements</h3>
+            <ul>
+                <li>Use POST requests for actions that change state, instead of GET.</li>
+                <li>Store game state per player session, so several players can use the server at once.</li>
+                <li>Add the cup-shake roll animation from the original design.</li>
+                <li>Now that I understand how to use Node.js and Express.js the entire project could be made more
+                    smoothly by starting with these specific technologies instead of adapting existing JavaScript</li>
+            </ul>
+        </section>
     </main>
 
 
